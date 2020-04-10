@@ -2,7 +2,7 @@ aktif();
 //tampil();
 
 function aktif() {
-	$('#movie-list2').html(`
+	$('#data-list2').html(`
 						    <div class="d-flex justify-content-center">
 		<div class="spinner-border text-danger" role="status">
 			<span class="sr-only">Loading...</span>
@@ -10,18 +10,19 @@ function aktif() {
 	  </div>
 						`)
      $.ajax({
-        url: 'https://smk-smeatdkosgoro2pdg.sch.id/lulusapikgr/aktifapi.php',
+        url: 'https://smk-smeatdkosgoro2pdg.sch.id/lulusapi/aktifapi.php',
+		//url: 'http://localhost/lulusapi/aktifapi.php',
         type: 'get',
         dataType: 'json',
         success: function(result){
 			//console.log(result.status);
             if(result.status == "sukses"){
-                let movies = result.data;				
-                $.each(movies, function(i, data){
+                let datas = result.data;				
+                $.each(datas, function(i, data){
 					//console.log(data.aktif);
 						if(data.aktif == "AKTIF")
 							{
-								$('#movie-list2').html(`
+								$('#data-list2').html(`
 									<div class="row mt-3 justify-content-center">
 										<form id=form-user method=POST>
 										<font size=2><b>Jadwal Pemgumuman : </b>&nbsp;
@@ -36,7 +37,7 @@ function aktif() {
 							}
 						if(data.aktif == "TIDAK AKTIF")
 							{
-								$('#movie-list2').html(`
+								$('#data-list2').html(`
 									<div class="row mt-3 justify-content-center">
 										<form id=form-user method=POST>
 										<font size=2><b>Jadwal Pemgumuman : </b>&nbsp;
@@ -55,7 +56,8 @@ function aktif() {
 					$("#form-user").on('submit',(function(e) {
 						e.preventDefault();
 						$.ajax({
-							url: "https://smk-smeatdkosgoro2pdg.sch.id/lulusapikgr/editaktif.php",
+							url: "https://smk-smeatdkosgoro2pdg.sch.id/lulusapi/editaktif.php",
+							//url: "https://localhost/lulusapi/editaktif.php",
 							type: "POST",
 							data:  new FormData(this),
 							contentType: false,
@@ -85,14 +87,15 @@ function aktif() {
 function tampil() {
 	//var coba = "cobaaa";
 //console.log(coba);
-$('#movie-list').html(` <div class="d-flex justify-content-center">
+$('#data-list').html(` <div class="d-flex justify-content-center">
 		<div class="spinner-border text-danger" role="status">
 			<span class="sr-only">Loading...</span>
 		</div>
 	  </div>  `);
-$('#movie-list1').html(``);
+$('#data-list1').html(``);
  $.ajax({
-        url: 'https://smk-smeatdkosgoro2pdg.sch.id/lulusapikgr/tampil5.php',
+        url: 'https://smk-smeatdkosgoro2pdg.sch.id/lulusapi/tampil5.php',
+		//url: 'http://localhost/lulusapi/tampil5.php',
         type: 'get',
         dataType: 'json',
 			data: {
@@ -100,12 +103,12 @@ $('#movie-list1').html(``);
         },
         success: function(result){
             if(result.status == "sukses1"){
-                let movies = result.data;				
-                $.each(movies, function(i, data){
+                let datas = result.data;				
+                $.each(datas, function(i, data){
 					if(data.ket == "LULUS" && data.adm == "LUNAS")
 						{
-							$('#movie-list').html('');
-								$('#movie-list').append(`
+							$('#data-list').html('');
+								$('#data-list').append(`
 									<form id=form-lulus5 method=POST>
 									<div class="row mt-0 justify-content-center">								
 										<table border=0 width=100%>									
@@ -131,8 +134,8 @@ $('#movie-list1').html(``);
 					
 					if(data.ket == "LULUS" && data.adm == "BELUM LUNAS")
 						{
-							$('#movie-list').html('');
-								$('#movie-list').append(`
+							$('#data-list').html('');
+								$('#data-list').append(`
 									<form id=form-lulus5 method=POST>
 									<div class="row mt-0 justify-content-center">								
 										<table border=0 width=100%>									
@@ -158,8 +161,8 @@ $('#movie-list1').html(``);
 
 					if(data.ket == "TIDAK LULUS")
 						{
-							$('#movie-list').html('');
-								$('#movie-list').append(`
+							$('#data-list').html('');
+								$('#data-list').append(`
 									<form id=form-lulus5 method=POST>
 									<div class="row mt-0 justify-content-center">								
 										<table border=0 width=100%>									
@@ -180,8 +183,8 @@ $('#movie-list1').html(``);
 
 					if(data.ket == "TIDAK LULUS" && data.adm == "LUNAS")
 						{
-							$('#movie-list').html('');
-								$('#movie-list').append(`
+							$('#data-list').html('');
+								$('#data-list').append(`
 									<form id=form-lulus5 method=POST>
 									<div class="row mt-0 justify-content-center">								
 										<table border=0 width=100%>									
@@ -207,8 +210,8 @@ $('#movie-list1').html(``);
 
 					if(data.ket == "TIDAK LULUS" && data.adm == "BELUM LUNAS")
 						{
-							$('#movie-list').html('');
-								$('#movie-list').append(`
+							$('#data-list').html('');
+								$('#data-list').append(`
 									<form id=form-lulus5 method=POST>
 									<div class="row mt-0 justify-content-center">								
 										<table border=0 width=100%>									
@@ -236,8 +239,8 @@ $('#movie-list1').html(``);
 					lulus();
         }
 		if(result.status == "gagal"){ 
-			$('#movie-list').html(``);
-			$('#movie-list1').html("<font color=red><b>Data Tidak Ditemukan</b></font>") }
+			$('#data-list').html(``);
+			$('#data-list1').html("<font color=red><b>Data Tidak Ditemukan</b></font>") }
 		}
     });
 }
@@ -262,7 +265,8 @@ function lulus() {
 						spin();
 						e.preventDefault();						
 						$.ajax({
-							url: "https://smk-smeatdkosgoro2pdg.sch.id/lulusapikgr/editlulus.php",
+							url: "https://smk-smeatdkosgoro2pdg.sch.id/lulusapi/editlulus.php",
+							//url: "http://localhost/lulusapi/editlulus.php",
 							type: "POST",
 							data:  new FormData(this),
 							contentType: false,
@@ -271,7 +275,7 @@ function lulus() {
 							success: function(data)
 							{	 
 								 alert("Data berhasil di Update"); 
-							$('#movie-list3').html('');
+							$('#data-list3').html('');
 							},
 							error: function() 
 							{ alert("Data Error..");
@@ -284,7 +288,7 @@ function lulus() {
 			}
 
 	function spin() {
-	$('#movie-list3').html(`
+	$('#data-list3').html(`
 						    <div class="d-flex justify-content-center">
 		<div class="spinner-border text-danger" role="status">
 			<span class="sr-only">Loading...</span>
